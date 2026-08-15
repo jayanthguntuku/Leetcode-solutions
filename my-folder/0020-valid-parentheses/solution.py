@@ -1,14 +1,13 @@
 class Solution:
     def isValid(self, s: str) -> bool:
+        dict_s = {'(':')', '[':']', '{':'}'}
         stack = []
-        di = {'(':')','{':'}','[':']',}
-        for i in s:
-            if i in '({[':
-                stack.append(i)
+        for c in s:
+            if c in "({[":
+                stack.append(c)
+            elif stack and dict_s.get(stack[-1]) == c:
+                stack.pop()
             else:
-                if(len(stack)!=0 and di[stack.pop()]== i):
-                    continue
-                else:
-                    return False
-        return len(stack)==0
-
+                return False
+        return len(stack) == 0
+        
